@@ -1,0 +1,19 @@
+﻿@model AirlineTicketingSystem.Models.AddMilesViewModel
+
+@{
+    ViewData["Title"] = "Add Miles to Account";
+}
+
+<h1>Add Miles to Account</h1>
+
+<form asp-action="AddMilesToAccount" method="post">
+    <div class="form-group">
+        <label for="accountId">Account ID:</label>
+        <input type="text" class="form-control" id="accountId" name="accountId" required />
+    </div>
+    <div class="form-group">
+        <label for="miles">Miles to Add:</label>
+        <input type="number" class="form-control" id="miles" name="miles" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Add Miles</button>
+</form>

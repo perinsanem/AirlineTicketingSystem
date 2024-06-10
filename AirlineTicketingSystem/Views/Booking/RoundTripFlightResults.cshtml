@@ -1,0 +1,101 @@
+﻿@model AirlineTicketingSystem.Models.RoundTripResults
+
+@{
+    ViewData["Title"] = "Round Trip Flight Results";
+}
+
+<h1>Round Trip Flight Results</h1>
+
+<div class="text-right mb-3">
+    <a href="@Url.Action("Register", "MilesSmiles")" class="btn btn-primary">Register for MilesSmiles</a>
+</div>
+
+<h2>Departure Flights</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Select</th>
+            <th>Flight Code</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Date</th>
+            <th>Capacity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var flight in Model.DepartureFlights)
+        {
+            <tr>
+                <td>
+                    <input type="radio" name="SelectedDepartureFlightId" value="@flight.FlightId" required />
+                </td>
+                <td>@flight.FlightCode</td>
+                <td>@flight.Origin</td>
+                <td>@flight.Destination</td>
+                <td>@flight.Date.ToString("yyyy-MM-dd")</td>
+                <td>@flight.Capacity</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Return Flights</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Select</th>
+            <th>Flight Code</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Date</th>
+            <th>Capacity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var flight in Model.ReturnFlights)
+        {
+            <tr>
+                <td>
+                    <input type="radio" name="SelectedReturnFlightId" value="@flight.FlightId" required />
+                </td>
+                <td>@flight.FlightCode</td>
+                <td>@flight.Origin</td>
+                <td>@flight.Destination</td>
+                <td>@flight.Date.ToString("yyyy-MM-dd")</td>
+                <td>@flight.Capacity</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form id="bookFlightsForm" asp-action="BookRoundTripFlights" method="post">
+    <input type="hidden" name="departureFlightId" id="departureFlightId" />
+    <input type="hidden" name="returnFlightId" id="returnFlightId" />
+    <input type="hidden" name="numberOfPassengers" value="@ViewBag.NumberOfPassengers" />
+
+    <div class="form-group">
+        <button type="button" id="bookFlightsBtn" class="btn btn-primary">Book</button>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $('#bookFlightsBtn').click(function () {
+                var departureFlightId = $('input[name="SelectedDepartureFlightId"]:checked').val();
+                var returnFlightId = $('input[name="SelectedReturnFlightId"]:checked').val();
+
+                // Validate if both departure and return flights are selected
+                if (!departureFlightId || !returnFlightId) {
+                    alert('Please select both departure and return flights.');
+                    return;
+                }
+
+                // Set the flight IDs and submit the form
+                $('#departureFlightId').val(departureFlightId);
+                $('#returnFlightId').val(returnFlightId);
+                $('#bookFlightsForm').submit();
+            });
+        });
+    </script>
+}

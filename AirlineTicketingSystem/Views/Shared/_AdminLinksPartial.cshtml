@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AirlineTicketingSystem.Areas.Identity.Data
+
+
+@inject UserManager<AirlineTicketingSystemUser> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var isAdmin = user?.IsAdmin == true;
+}
+
+@if (isAdmin)
+{
+
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Flight" asp-action="AddFlight">Add Flight</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="MilesSmiles" asp-action="AddMilesToAccount">Add Miles To Account</a>
+    </li>
+}

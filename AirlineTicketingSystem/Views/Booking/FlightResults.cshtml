@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AirlineTicketingSystem.Models.Flight>
+
+@{
+    ViewData["Title"] = "Flight Results";
+}
+
+<h1>Flight Results</h1>
+
+<div class="text-right mb-3">
+    <a href="@Url.Action("Register", "MilesSmiles")" class="btn btn-primary">Register for MilesSmiles</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Flight Code</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Date</th>
+            <th>Capacity</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var flight in Model)
+        {
+            <tr>
+                <td>@flight.FlightCode</td>
+                <td>@flight.Origin</td>
+                <td>@flight.Destination</td>
+                <td>@flight.Date.ToString("yyyy-MM-dd")</td>
+                <td>@flight.Capacity</td>
+                <td>
+                    <form asp-controller="Booking" asp-action="BookFlight" method="post">
+                        <input type="hidden" name="flightId" value="@flight.FlightId" />
+                        <input type="hidden" name="numberOfPassengers" value="@ViewBag.NumberOfPassengers" />
+                        <input type="submit" value="Book" class="btn btn-primary" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

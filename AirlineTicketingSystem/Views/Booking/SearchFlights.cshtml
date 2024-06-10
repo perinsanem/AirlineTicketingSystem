@@ -1,0 +1,66 @@
+﻿@model AirlineTicketingSystem.Models.FlightSearchModel
+
+@{
+    ViewData["Title"] = "Search Flights";
+}
+
+<h1>Search Flights</h1>
+
+<style>
+    .form-check-inline {
+        display: inline-block;
+        margin-right: 15px;
+    }
+</style>
+
+<form asp-action="SearchFlights" method="post">
+    <div class="form-group">
+       
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="TripType" value="OneWay" checked />
+            <label class="form-check-label">One Way</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="TripType" value="RoundTrip" />
+            <label class="form-check-label">Round Trip</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Origin" class="control-label"></label>
+        <input asp-for="Origin" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Destination" class="control-label"></label>
+        <input asp-for="Destination" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Date" class="control-label">Departure Date</label>
+        <input asp-for="Date" class="form-control" type="date" />
+    </div>
+    <div class="form-group return-date-group" style="display:none;">
+        <label asp-for="ReturnDate" class="control-label">Return Date</label>
+        <input asp-for="ReturnDate" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Capacity" class="control-label"></label>
+        <input asp-for="Capacity" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Search Flights" class="btn btn-primary" />
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('input[name="TripType"]').change(function () {
+                if ($(this).val() === 'RoundTrip') {
+                    $('.return-date-group').show();
+                } else {
+                    $('.return-date-group').hide();
+                }
+            });
+        });
+    </script>
+}

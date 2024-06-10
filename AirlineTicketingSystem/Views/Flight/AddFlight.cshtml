@@ -1,0 +1,43 @@
+﻿@model AirlineTicketingSystem.Models.Flight
+
+@{
+    ViewData["Title"] = "Add Flight";
+}
+
+<h1>Add Flight</h1>
+
+<form asp-action="AddFlight" method="post">
+    <div class="form-group">
+        <label asp-for="Origin" class="control-label"></label>
+        <input asp-for="Origin" class="form-control" />
+        <span asp-validation-for="Origin" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Destination" class="control-label"></label>
+        <input asp-for="Destination" class="form-control" />
+        <span asp-validation-for="Destination" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Date" class="control-label"></label>
+        <input asp-for="Date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Capacity" class="control-label"></label>
+        <input asp-for="Capacity" class="form-control" />
+        <span asp-validation-for="Capacity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FlightCode" class="control-label"></label>
+        <input asp-for="FlightCode" class="form-control" />
+        <span asp-validation-for=" FlightCode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MilPoint" class="control-label"></label>
+        <input asp-for="MilPoint" class="form-control" />
+        <span asp-validation-for="MilPoint" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Add Flight" class="btn btn-primary" />
+    </div>
+</form>
